@@ -1,6 +1,6 @@
 # Wright Flyer 1903, an interactive 3D model
 
-**Live demo:** https://shasidharK.github.io/wright-flyer-1903/
+**Live demo:** https://shasidhark.github.io/wright-flyer-1903/
 
 A browser-playable 3D model of the Wright brothers' 1903 Flyer, the first powered, controlled, sustained flight aircraft. It runs in any modern browser, on a desktop or a phone, with no install. The page is a single HTML file that uses [three.js](https://threejs.org) for the 3D.
 
