@@ -705,6 +705,7 @@ const WF_APP = (() => {
   .wf-bar2.away { display:none; } .wf-bar2 .wf-div { width:1px; align-self:stretch; background:var(--line); flex:none; }
   .wf-bar2 label { display:flex; flex-direction:column; gap:2px; min-width:112px; } .wf-bar2 label > span { font-size:.8em; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); display:flex; justify-content:space-between; gap:6px; }
   .wf-bar2 label output { color:var(--ink); text-transform:none; letter-spacing:0; } .wf-bar2 .wf-seg { min-width:170px; }
+  .wf-credit { position:fixed; left:50%; bottom:3px; transform:translateX(-50%); z-index:1; pointer-events:none; white-space:nowrap; font-size:10px; letter-spacing:.08em; color:var(--dim); opacity:.4; }
   .wf-fade { position:fixed; inset:0; z-index:20; background:var(--bg); opacity:0; pointer-events:none; transition:opacity .26s var(--wf-ease); } .wf-fade.on { opacity:1; }
   .wf-intro { position:fixed; inset:0; z-index:30; display:grid; place-items:center; background:color-mix(in srgb, var(--bg) 70%, transparent); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); animation:wfFadeIn .3s both; padding:16px; }
   @keyframes wfFadeIn { from { opacity:0; } }
@@ -881,6 +882,7 @@ const WF_APP = (() => {
     const coarse = matchMedia('(pointer: coarse)'), setTouch = () => document.documentElement.classList.toggle('wf-touch', coarse.matches || narrow.matches);
     setTouch(); coarse.addEventListener('change', setTouch); narrow.addEventListener('change', setTouch);
     ui.fade = el('div', 'wf-fade'); document.body.appendChild(ui.fade);
+    document.body.appendChild(el('div', 'wf-credit', 'Created by Shasidhar Kanchu'));   // a quiet credit on every mode
     const modes = el('div', 'wf-modes'), mind = el('span', 'wf-ind'); modes.appendChild(mind); ui.modes = modes; ui.mind = mind;
     Object.entries(MODES).forEach(([k, m], i) => { const b = el('button', '', `${ICON[k]}<span>${m.name}</span><small>${m.sub}</small>`); b.dataset.m = k; b.title = `${m.name}: ${m.sub} (${i + 1})`; b.addEventListener('click', () => { setMode(k); b.blur(); }); modes.appendChild(b); });
     document.body.appendChild(modes);
