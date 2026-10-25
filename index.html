@@ -5561,7 +5561,8 @@ const WF_APP = (() => {
   /* a phone on its side: one slim header row, the panels in a drawer from the right, the picture left whole */
   html.wf-pland #top { top:8px; left:12px; right:12px; } html.wf-pland .swatches { display:none; }
   html.wf-pland .wf-modes { top:8px; padding:2px; } html.wf-pland .wf-modes button { padding:5px 9px; gap:5px; } html.wf-pland .wf-modes button small, html.wf-pland .wf-modes button:not(.on) span { display:none; }
-  html.wf-pland .wf-dock { display:flex; flex-direction:column; gap:6px; position:fixed; z-index:8; top:46px; right:8px; bottom:8px; width:min(330px, calc(var(--wf-vw, 100vw) * .46)); overflow:auto; overscroll-behavior:contain;
+  /* the drawer is only as tall as its panels: folded ones leave the picture and the throttle strip free to touch */
+  html.wf-pland .wf-dock { display:flex; flex-direction:column; gap:6px; position:fixed; z-index:8; top:46px; right:8px; max-height:calc(var(--wf-vh, 100vh) - 54px); width:min(330px, calc(var(--wf-vw, 100vw) * .46)); overflow:auto; overscroll-behavior:contain;
     transform:translateX(calc(100% + 16px)); visibility:hidden; transition:transform .32s var(--wf-ease), visibility 0s .32s; }
   html.wf-pland .wf-dock.open { transform:none; visibility:visible; transition:transform .32s var(--wf-ease); }
   html.wf-pland .wf-dock .wf-panel { position:static !important; width:auto !important; max-width:none; max-height:none !important; } html.wf-pland .wf-dock .wf-head { cursor:pointer; }
@@ -5569,7 +5570,9 @@ const WF_APP = (() => {
   html.wf-pland .wf-bar2 .wf-div { display:block; }
   html.wf-pland .wf-dock.open ~ .wf-bar2 { right:calc(min(330px, calc(var(--wf-vw, 100vw) * .46)) + 16px); }   /* the bar stays clear of an open drawer */
   html.wf-pland .wf-toast { top:46px; } html.wf-pland .wf-intro > div { padding:14px; }
-  html.wf-pland .wf-stick { left:16px; bottom:16px; width:104px; height:104px; } html.wf-pland .wf-thr { right:16px; bottom:16px; height:118px; }
+  html.wf-pland .wf-stick { left:16px; bottom:16px; width:104px; height:104px; } html.wf-pland .wf-thr { right:16px; bottom:16px; height:118px; transition:right .32s var(--wf-ease); }
+  html.wf-pland .wf-dock.open ~ .wf-thr { right:calc(min(330px, calc(var(--wf-vw, 100vw) * .46)) + 16px); }   /* the throttle steps out from under an open drawer */
+  html.wf-pland[data-wf-mode="field"]:has(.wf-dock.open) #read { display:none; }   /* the Flight panel in the drawer shows the same numbers */
   html.wf-pland[data-wf-mode="field"] #read { left:50%; right:auto; bottom:12px; transform:translateX(-50%); text-align:center; max-width:calc(var(--wf-vw, 100vw) - 300px); font-size:11px; }
   /* full view, where the browser can't go full screen: just the picture and the flying controls */
   html.wf-immersive #top, html.wf-immersive .wf-modes, html.wf-immersive .wf-dock, html.wf-immersive .wf-panel, html.wf-immersive .wf-bar2, html.wf-immersive .wf-labels { display:none !important; }
